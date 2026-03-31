@@ -1,0 +1,22 @@
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    ports:
+      - "8000:80"
+
+    depends_on:
+       - cache
+
+  cache:
+    image: redis:alpine
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
+    driver: local
+
+  
